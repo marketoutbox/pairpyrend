@@ -37,13 +37,13 @@ def adf_test_api():
         critical_values = adf_result[4] # Dictionary of critical values
 
         # Determine stationarity based on p-value (common significance level 0.05)
-        is_stationary = p_value < 0.05
+        is_stationary = bool(p_value < 0.05) # Explicitly cast to Python bool
 
         return jsonify({
             "statistic": test_statistic,
             "pValue": p_value,
             "criticalValues": critical_values,
-            "isStationary": is_stationary
+            "isStationary": is_stationary # This will now be a standard Python bool
         }), 200
 
     except Exception as e:
